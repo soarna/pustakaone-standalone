@@ -1,20 +1,7 @@
-# PustakaOne v2
+# PustakaOne standalone
+Oleh: I Gusti Bagus Wiradharma Putra (230030055) Sistem Informasi
 
 ## Cara Pakai - Cukup Double-Click jalankan.bat
-
-**Pertama kali** (butuh internet ~1x saja):
-- Download Node.js portable otomatis (~30MB)
-- Download paket aplikasi otomatis (~15MB)
-- Keduanya tersimpan di folder ini
-
-**Setelah itu / dikirim ke PC lain:**
-- Zip SELURUH folder ini (termasuk node_portable + node_modules)
-- Kirim ke PC manapun
-- Double-click jalankan.bat - langsung jalan TANPA internet
-- TIDAK perlu install Node.js, MySQL, atau apapun
-
----
-
 ## Login Default
 
   Email    : admin@pustakaone.com

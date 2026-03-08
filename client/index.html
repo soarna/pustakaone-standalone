@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PustakaOne</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- AUTH PAGE -->
+<div id="auth-page">
+  <div class="auth-container">
+    <div class="auth-logo">
+      <h1>PustakaOne</h1>
+    </div>
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login')">Masuk</button>
+        <button class="auth-tab"        onclick="switchAuthTab('register')">Daftar</button>
+      </div>
+
+      <!-- Form Login -->
+      <div id="tab-login" class="auth-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="nama@email.com"
+                 onkeydown="if(event.key==='Enter') login()">
+        </div>
+        <div class="form-group">
+          <label>Kata Sandi</label>
+          <input type="password" id="login-password" placeholder="Kata sandi"
+                 onkeydown="if(event.key==='Enter') login()">
+        </div>
+        <button id="btn-login" class="btn btn-primary w-full" onclick="login()"
+                style="justify-content:center">Masuk</button>
+      </div>
+
+      <!-- Form Registrasi -->
+      <div id="tab-register" class="auth-form hidden">
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" id="reg-name" placeholder="Nama Anda">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="reg-email" placeholder="nama@email.com">
+        </div>
+        <div class="form-group">
+          <label>Kata Sandi</label>
+          <input type="password" id="reg-password" placeholder="Min. 5 karakter">
+        </div>
+        <button id="btn-register" class="btn btn-primary w-full" onclick="register()"
+                style="justify-content:center">Buat Akun</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP PAGE -->
+<div id="app-page" class="hidden">
+
+  <div class="net-banner">
+    <div class="net-dot"></div>
+    <span id="net-info">Menghubungkan...</span>
+  </div>
+
+  <div class="app-body">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sb-user">
+        <div class="sb-avatar" id="sb-avatar">?</div>
+        <div>
+          <div class="sb-user-name" id="sb-name">-</div>
+          <div class="sb-user-role" id="sb-role">-</div>
+        </div>
+      </div>
+      <div class="sidebar-nav" id="sidebar-nav"></div>
+      <div class="sb-footer">
+        <button class="btn w-full btn-sm" onclick="logout()" style="justify-content:center">
+          Keluar
+        </button>
+      </div>
+    </nav>
+
+    <!-- Konten utama -->
+    <main class="main-content">
+      <div class="topbar">
+        <div class="topbar-title" id="topbar-title">Dashboard</div>
+        <div class="search-bar">
+          <input type="text" id="global-search" placeholder="Cari judul, penulis, genre..."
+                 oninput="App.globalSearch(this.value)">
+        </div>
+      </div>
+
+      <div class="page-content">
+
+        <!-- Dashboard -->
+        <div class="view active" id="view-dashboard">
+          <div class="section-header"><h2>Buku Terbaru</h2></div>
+          <div class="books-grid" id="recent-books"></div>
+        </div>
+
+        <!-- Katalog -->
+        <div class="view" id="view-catalog">
+          <div class="section-header"><h2>Katalog Buku</h2></div>
+          <div class="filter-bar">
+            <select class="filter-select" id="filter-genre" onchange="App.renderCatalog()">
+              <option value="">Semua Genre</option>
+            </select>
+            <select class="filter-select" id="filter-sort" onchange="App.renderCatalog()">
+              <option value="newest">Terbaru</option>
+              <option value="oldest">Terlama</option>
+              <option value="title">Judul A-Z</option>
+              <option value="author">Penulis A-Z</option>
+            </select>
+          </div>
+          <div class="books-grid" id="catalog-books"></div>
+        </div>
+
+        <!-- Wishlist -->
+        <div class="view" id="view-wishlist">
+          <div class="section-header"><h2>Daftar Buku Saya</h2></div>
+          <div class="books-grid" id="wishlist-books"></div>
+        </div>
+
+        <!-- Kelola Buku -->
+        <div class="view" id="view-manage-books">
+          <div class="section-header">
+            <h2>Kelola Buku</h2>
+            <button class="btn btn-primary" onclick="App.openAddBook()">+ Tambah Buku</button>
+          </div>
+          <div class="card" style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Sampul</th><th>Judul</th><th>Penulis</th>
+                  <th>Genre</th><th>Tahun</th><th>File</th><th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="manage-books-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Kelola Pengguna -->
+        <div class="view" id="view-manage-users">
+          <div class="section-header">
+            <h2>Kelola Pengguna</h2>
+          </div>
+          <div class="card" style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Nama</th><th>Email</th><th>Peran</th><th>Terdaftar</th><th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Profil -->
+        <div class="view" id="view-profile">
+          <div class="section-header"><h2>Profil Saya</h2></div>
+          <div class="card" style="max-width:460px">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px">
+              <div class="prof-avatar-lg" id="prof-avatar"></div>
+              <div>
+                <h3 id="prof-name"  style="font-family:'Playfair Display',serif;font-size:20px"></h3>
+                <p  id="prof-email" style="font-size:13px;color:var(--muted);margin-top:2px"></p>
+                <span class="badge" id="prof-role-badge" style="margin-top:6px;display:inline-block"></span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="edit-name">
+              </div>
+              <div class="form-group">
+                <label>Kata Sandi Baru</label>
+                <input type="password" id="edit-password" placeholder="Kosongkan jika tidak diubah">
+              </div>
+              <button class="btn btn-primary" onclick="App.saveProfile()">Simpan Perubahan</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hasil pencarian -->
+        <div class="view" id="view-search">
+          <div class="section-header"><h2>Hasil Pencarian</h2></div>
+          <div class="books-grid" id="search-results"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Modal Tambah/Edit Buku -->
+<div class="modal-overlay hidden" id="modal-book">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-book-title">Tambah Buku</h3>
+      <button class="modal-close" onclick="App.closeModal('modal-book')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="book-edit-id">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="form-group" style="grid-column:1/-1">
+          <label>Judul *</label>
+          <input type="text" id="book-f-title" placeholder="Judul buku">
+        </div>
+        <div class="form-group">
+          <label>Penulis *</label>
+          <input type="text" id="book-f-author" placeholder="Nama penulis">
+        </div>
+        <div class="form-group">
+          <label>Penerbit</label>
+          <input type="text" id="book-f-publisher" placeholder="Nama penerbit">
+        </div>
+        <div class="form-group">
+          <label>Tahun</label>
+          <input type="number" id="book-f-year" min="1900" max="2099" placeholder="2024">
+        </div>
+        <div class="form-group">
+          <label>Genre</label>
+          <select id="book-f-genre">
+            <option>Fiksi</option><option>Non-Fiksi</option><option>Sains</option>
+            <option>Sejarah</option><option>Teknologi</option><option>Sastra</option>
+            <option>Pendidikan</option><option>Biografi</option><option>Lainnya</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label>ISBN</label>
+          <input type="text" id="book-f-isbn" placeholder="978-xxx-xxx-xxx-x">
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label>Deskripsi</label>
+          <textarea id="book-f-desc" placeholder="Ringkasan buku..."></textarea>
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label>Sampul Buku</label>
+          <div style="display:flex;gap:16px;margin-bottom:8px">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;text-transform:none;font-weight:500;color:var(--text)">
+              <input type="radio" name="cover-method" value="url" checked onchange="App.toggleCoverMethod(this.value)"> URL
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;text-transform:none;font-weight:500;color:var(--text)">
+              <input type="radio" name="cover-method" value="file" onchange="App.toggleCoverMethod(this.value)"> Upload File
+            </label>
+          </div>
+          <div id="cover-url-wrap">
+            <input type="text" id="book-f-cover" placeholder="https://contoh.com/gambar.jpg"
+                   oninput="App.previewCoverUrl(this.value)">
+          </div>
+          <div id="cover-file-wrap" style="display:none">
+            <input type="file" id="book-f-cover-file" accept="image/*"
+                   onchange="App.previewCoverFile(this)" style="font-size:13px">
+          </div>
+          <div id="cover-prev-wrap" style="display:none;margin-top:8px">
+            <img id="cover-prev-img" src="" alt="Preview"
+                 style="width:60px;height:88px;object-fit:cover;border-radius:6px;border:1.5px solid var(--border)">
+          </div>
+        </div>
+        <div class="form-group" style="grid-column:1/-1">
+          <label>URL File PDF</label>
+          <input type="text" id="book-f-file" placeholder="https://... (opsional)">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="App.closeModal('modal-book')">Batal</button>
+      <button class="btn btn-primary" onclick="App.saveBook()">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Detail Buku -->
+<div class="modal-overlay hidden" id="modal-book-detail">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Detail Buku</h3>
+      <button class="modal-close" onclick="App.closeModal('modal-book-detail')">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-detail-body"></div>
+  </div>
+</div>
+
+<!-- Toast container -->
+
+<script src="lib/services/ApiService.js"></script>
+<script src="lib/ui/ui.js"></script>
+<script src="lib/ui/App.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => App.init());
+  document.querySelectorAll(".modal-overlay").forEach(overlay =>
+    overlay.addEventListener("click", e => {
+      if (e.target === overlay) overlay.classList.add("hidden");
+    })
+  );
+</script>
+</body>
+</html>

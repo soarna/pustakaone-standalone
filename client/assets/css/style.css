@@ -1,0 +1,646 @@
+:root {
+  --primary : #002fff;
+  --gold    : #1c64ff;
+  --danger  : #dc3545;
+  --success : #28a745;
+  --bg      : #e0e0e0;
+  --white   : #ffffff;
+  --text    : #1a1208;
+  --muted   : #7c6a55;
+  --border  : #e5ddd0;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  margin     : 0;
+  padding    : 0;
+  box-sizing : border-box;
+}
+
+body {
+  background  : var(--bg);
+  color       : var(--text);
+  font-size   : 14px;
+  line-height : 1.5;
+}
+
+.hidden {
+  display : none !important;
+}
+
+.w-full {
+  width : 100%;
+}
+
+/* ============================================================
+   TOMBOL
+   ============================================================ */
+.btn {
+  display       : inline-flex;
+  align-items   : center;
+  padding       : 8px 16px;
+  border        : 1px solid var(--border);
+  border-radius : 6px;
+  background    : var(--white);
+  color         : var(--text);
+  font-size     : 13px;
+  font-weight   : 500;
+  cursor        : pointer;
+}
+
+.btn:hover {
+  background : #f0ebe3;
+}
+
+.btn:disabled {
+  opacity : .5;
+  cursor  : not-allowed;
+}
+
+.btn-sm {
+  padding   : 4px 10px;
+  font-size : 12px;
+}
+
+.btn-primary {
+  background   : var(--primary);
+  color        : #fff;
+  border-color : var(--primary);
+}
+
+.btn-primary:hover {
+  background : #001b3a;
+}
+
+.btn-gold {
+  background   : var(--gold);
+  color        : #fff;
+  border-color : var(--gold);
+}
+
+.btn-gold:hover {
+  background : #0016da;
+}
+
+.btn-outline {
+  border       : 1.5px solid var(--primary);
+  color        : var(--primary);
+  background   : var(--white);
+}
+
+.btn-outline:hover {
+  background : #f9ede4;
+}
+
+.btn-danger {
+  background   : #fdecea;
+  color        : var(--danger);
+  border-color : #f5b0a8;
+}
+
+.btn-danger:hover {
+  background : var(--danger);
+  color      : #fff;
+}
+
+.btn-success {
+  background   : #e6f4e6;
+  color        : var(--success);
+  border-color : #a3d4a3;
+}
+
+.btn-success:hover {
+  background : var(--success);
+  color      : #fff;
+}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.form-group {
+  display        : flex;
+  flex-direction : column;
+  gap            : 5px;
+}
+
+.form-group label {
+  font-size      : 11px;
+  font-weight    : 700;
+  text-transform : uppercase;
+  letter-spacing : .5px;
+  color          : var(--muted);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding       : 8px 12px;
+  border        : 1.5px solid var(--border);
+  border-radius : 6px;
+  font-size     : 14px;
+  background    : var(--white);
+  color         : var(--text);
+  outline       : none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color : var(--primary);
+}
+
+.form-group textarea {
+  resize     : vertical;
+  min-height : 70px;
+}
+
+/* ============================================================
+   HALAMAN AUTH
+   ============================================================ */
+#auth-page {
+  min-height      : 100vh;
+  background      : linear-gradient(135deg, var(--primary) 0%, #5a2d0c 100%);
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  padding         : 20px;
+}
+
+.auth-container {
+  width     : 100%;
+  max-width : 420px;
+}
+
+.auth-logo {
+  text-align    : center;
+  margin-bottom : 20px;
+}
+
+.auth-logo h1 {
+  font-size   : 32px;
+  color       : #fff;
+}
+.auth-card {
+  background    : var(--white);
+  border-radius : 12px;
+  padding       : 28px;
+}
+
+.auth-tabs {
+  display       : flex;
+  margin-bottom : 20px;
+  border        : 1.5px solid var(--border);
+  border-radius : 8px;
+  overflow      : hidden;
+}
+
+.auth-tab {
+  flex        : 1;
+  padding     : 9px;
+  border      : none;
+  background  : #f5f0e8;
+  font-size   : 13px;
+  font-weight : 600;
+  cursor      : pointer;
+}
+
+.auth-tab.active {
+  background : var(--primary);
+  color      : #fff;
+}
+
+.auth-form {
+  display        : flex;
+  flex-direction : column;
+  gap            : 14px;
+}
+
+.auth-form h2 {
+  font-size   : 20px;
+}
+
+/* ============================================================
+   LAYOUT UTAMA
+   ============================================================ */
+#app-page {
+  display        : flex;
+  flex-direction : column;
+  min-height     : 100vh;
+}
+
+.net-banner {
+  background  : var(--primary);
+  color       : #fff;
+  padding     : 5px 20px;
+  display     : flex;
+  align-items : center;
+  gap         : 8px;
+  font-size   : 12px;
+  position    : sticky;
+  top         : 0;
+  z-index     : 200;
+}
+
+.net-dot {
+  width         : 8px;
+  height        : 8px;
+  border-radius : 50%;
+  background    : #4ade80;
+  flex-shrink   : 0;
+}
+
+.app-body {
+  display : flex;
+  flex    : 1;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+  width          : 210px;
+  background     : black;
+  color          : #eee;
+  display        : flex;
+  flex-direction : column;
+  position       : fixed;
+  top            : 29px;
+  left           : 0;
+  height         : calc(100vh - 29px);
+  overflow-y     : auto;
+  z-index        : 100;
+  border-right   : 1px solid rgba(255,255,255,.08);
+}
+
+.sb-user {
+  padding       : 12px 16px;
+  border-bottom : 1px solid rgba(255,255,255,.08);
+  display       : flex;
+  align-items   : center;
+  gap           : 10px;
+}
+
+
+.sb-user-name {
+  font-size   : 13px;
+  font-weight : 600;
+}
+
+.sb-user-role {
+  font-size : 11px;
+  color     : #888;
+}
+
+.sidebar-nav {
+  flex    : 1;
+  padding : 8px 0;
+}
+
+.nav-section {
+  padding        : 8px 16px 3px;
+  font-size      : 10px;
+  text-transform : uppercase;
+  color          : #555;
+  letter-spacing : 1px;
+  font-weight    : 700;
+}
+
+.nav-item {
+  padding   : 9px 16px;
+  cursor    : pointer;
+  font-size : 13px;
+  color     : #aaa;
+}
+
+.nav-item:hover {
+  background : rgba(255,255,255,.07);
+  color      : #fff;
+}
+
+.nav-item.active {
+  background  : rgba(255,255,255,.07);
+  color       : #fff;
+  border-left : 3px solid var(--amber);
+}
+
+.sb-footer {
+  padding    : 12px 16px;
+  border-top : 1px solid rgba(255,255,255,.08);
+}
+
+.sb-footer .btn {
+  color           : #fff;
+  border-color    : rgba(255,255,255,.3);
+  background      : rgba(255,255,255,.08);
+  justify-content : center;
+}
+
+.sb-footer .btn:hover {
+  background : rgba(255,255,255,.16);
+}
+
+/* ============================================================
+   KONTEN UTAMA
+   ============================================================ */
+.main-content {
+  margin-left    : 210px;
+  flex           : 1;
+  display        : flex;
+  flex-direction : column;
+}
+
+.topbar {
+  background      : var(--white);
+  border-bottom   : 1px solid var(--border);
+  padding         : 10px 20px;
+  display         : flex;
+  align-items     : center;
+  justify-content : space-between;
+  position        : sticky;
+  top             : 29px;
+  z-index         : 50;
+}
+
+.topbar-title {
+  font-family : 'Playfair Display', serif;
+  font-size   : 19px;
+  font-weight : 700;
+}
+
+.search-bar {
+  display       : flex;
+  align-items   : center;
+  border        : 1.5px solid var(--border);
+  border-radius : 8px;
+  padding       : 6px 12px;
+  background    : var(--bg);
+  width         : 250px;
+}
+
+.search-bar input {
+  border     : none;
+  outline    : none;
+  font-size  : 13px;
+  width      : 100%;
+  background : transparent;
+}
+
+.page-content {
+  padding : 20px;
+  flex    : 1;
+}
+
+.view {
+  display : none;
+}
+
+.view.active {
+  display : block;
+}
+
+.section-header {
+  display         : flex;
+  align-items     : center;
+  justify-content : space-between;
+  margin-bottom   : 18px;
+}
+
+.section-header h2 {
+  font-family : 'Playfair Display', serif;
+  font-size   : 20px;
+}
+
+/* ============================================================
+   KARTU BUKU
+   ============================================================ */
+.books-grid {
+  display               : grid;
+  grid-template-columns : repeat(auto-fill, minmax(170px, 1fr));
+  gap                   : 16px;
+}
+
+.book-card {
+  background    : var(--white);
+  border        : 1px solid var(--border);
+  border-radius : 8px;
+  overflow      : hidden;
+}
+
+.book-cover {
+  height          : 165px;
+  background      : #f0ebe3;
+  overflow        : hidden;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+}
+
+.book-cover img {
+  width      : 100%;
+  height     : 100%;
+  object-fit : cover;
+}
+
+.book-info {
+  padding : 10px;
+}
+
+.book-title {
+  font-size   : 13px;
+  font-weight : 700;
+  line-height : 1.3;
+}
+
+.book-author {
+  font-size  : 11px;
+  color      : var(--muted);
+  margin-top : 3px;
+}
+
+.book-actions {
+  padding   : 0 10px 10px;
+  display   : flex;
+  gap       : 4px;
+  flex-wrap : wrap;
+}
+
+.tag-row {
+  margin-top : 5px;
+}
+
+/* ============================================================
+   FILTER & TABEL
+   ============================================================ */
+.filter-bar {
+  display       : flex;
+  gap           : 8px;
+  margin-bottom : 18px;
+  flex-wrap     : wrap;
+}
+
+.filter-select {
+  padding       : 7px 12px;
+  border        : 1.5px solid var(--border);
+  border-radius : 6px;
+  font-size     : 13px;
+  background    : var(--white);
+  outline       : none;
+  cursor        : pointer;
+}
+
+.card {
+  background    : var(--white);
+  border        : 1px solid var(--border);
+  border-radius : 8px;
+  padding       : 20px;
+}
+
+.data-table {
+  width           : 100%;
+  border-collapse : collapse;
+}
+
+.data-table th {
+  background     : #f5f0e8;
+  padding        : 10px 12px;
+  text-align     : left;
+  font-size      : 12px;
+  font-weight    : 700;
+  text-transform : uppercase;
+  letter-spacing : .5px;
+  border-bottom  : 2px solid var(--border);
+}
+
+.data-table td {
+  padding       : 10px 12px;
+  border-bottom : 1px solid #f0ebe3;
+  font-size     : 13px;
+}
+
+.data-table tr:hover td {
+  background : #faf7f2;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+  position        : fixed;
+  inset           : 0;
+  background      : rgba(0,0,0,.5);
+  z-index         : 300;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  padding         : 20px;
+}
+
+.modal {
+  background    : var(--white);
+  border-radius : 12px;
+  width         : 100%;
+  max-width     : 520px;
+  max-height    : 90vh;
+  overflow-y    : auto;
+  border        : 1px solid var(--border);
+}
+
+.modal-header {
+  padding         : 16px 20px;
+  border-bottom   : 1px solid var(--border);
+  display         : flex;
+  align-items     : center;
+  justify-content : space-between;
+  position        : sticky;
+  top             : 0;
+  background      : var(--white);
+  z-index         : 1;
+}
+
+.modal-header h3 {
+  font-size   : 17px;
+}
+
+.modal-close {
+  background  : none;
+  border      : none;
+  font-size   : 20px;
+  cursor      : pointer;
+  color       : #aaa;
+  line-height : 1;
+}
+
+.modal-close:hover {
+  color : var(--text);
+}
+
+.modal-body {
+  padding        : 20px;
+  display        : flex;
+  flex-direction : column;
+  gap            : 14px;
+}
+
+.modal-footer {
+  padding         : 14px 20px;
+  border-top      : 1px solid var(--border);
+  display         : flex;
+  gap             : 8px;
+  justify-content : flex-end;
+}
+
+/* ============================================================
+   DETAIL BUKU
+   ============================================================ */
+.book-detail-cover {
+  width           : 100%;
+  height          : 200px;
+  background      : #f0ebe3;
+  border-radius   : 8px;
+  overflow        : hidden;
+  margin-bottom   : 14px;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+}
+
+.book-detail-cover img {
+  width      : 100%;
+  height     : 100%;
+  object-fit : cover;
+}
+
+.book-meta {
+  display               : grid;
+  grid-template-columns : 1fr 1fr;
+  gap                   : 10px;
+  background            : #faf7f2;
+  padding               : 14px;
+  border-radius         : 8px;
+  border                : 1px solid var(--border);
+  margin                : 10px 0;
+}
+
+.book-meta-item label {
+  font-size      : 10px;
+  text-transform : uppercase;
+  color          : #aaa;
+  font-weight    : 700;
+}
+
+.book-meta-item p {
+  font-size   : 13px;
+  font-weight : 500;
+  margin-top  : 2px;
+}
+
+.book-desc-box {
+  background    : #faf7f2;
+  padding       : 12px 14px;
+  border-radius : 0 8px 8px 0;
+  font-size     : 13px;
+  line-height   : 1.7;
+  color         : var(--muted);
+}
